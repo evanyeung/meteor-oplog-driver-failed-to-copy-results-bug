@@ -6,7 +6,7 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
   Meteor.publish('userData', function(){
-    return Meteor.users.find({_id: this.userId}, {fields: {extraField: 1}});
+    return Meteor.users.find({_id: Meteor.userId}, {fields: {extraField: 1}});
   });
 
   Accounts.onCreateUser(function(options, user){
