@@ -2,7 +2,7 @@ Organizations = new Meteor.Collection('organizations');
 
 if (Meteor.isClient) {
   Deps.autorun(function(){
-    Meteor.subscribe('userData');
+    Meteor.subscribe('Organizations');
   });
 }
 
