@@ -1,3 +1,5 @@
+Organizations = new Meteor.Collection('organizations');
+
 if (Meteor.isClient) {
   Deps.autorun(function(){
     Meteor.subscribe('userData');
@@ -5,7 +7,9 @@ if (Meteor.isClient) {
 }
 
 if (Meteor.isServer) {
-  Meteor.publish('userData', function(){
-    return Meteor.users.find({_id: Meteor.userId});
+  Meteor.startup(function(){
+    Meteor.publish('Organizations', function(){
+      Organizations.find({$or: [{ 'ownerId': this.userId }, { 'users.userId': { $in: [this.userId] } }]});
+    });
   });
 }
